@@ -1,6 +1,5 @@
 package org.cw;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +17,8 @@ public class Main {
 			for(String fileName : files) {
 				System.out.println(fileName);
 			}
+			
+			System.out.println(files.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -27,20 +28,27 @@ public class Main {
 	    try (Stream<Path> stream = Files.walk(Paths.get(dir), depth)) {
 	        return stream
 	          .filter(file -> !Files.isDirectory(file))
-		      .filter(file -> isValidFileName(file.getFileName()))
-	          .map(Path::getFileName)
+		      .filter(file -> isValidFileName(file))
 	          .map(Path::toString)
 	          .collect(Collectors.toSet());
 	    }
 	}	
 	
 	private static boolean isValidFileName(Path path) {
-		String fileName = path.toString();
-		boolean isValid = fileName.endsWith(".txt");
+		String fileName = path.getFileName().toString();
+		boolean isValid = fileName.endsWith(".txt") && fileName.indexOf("_") > 0;
 		if(isValid) {
-			fileName = fileName.substring(0, fileName.indexOf("_"));				
-			Integer fileNameInt = Integer.valueOf(fileName);
-			isValid = fileNameInt >= 6000 && fileNameInt <= 6250;
+			fileName = fileName.substring(0, fileName.indexOf("_"));
+			if (fileName.matches("\\d+")) {
+	            Integer fileNameInt = Integer.valueOf(fileName);
+	            if (path.getParent().getFileName().toString().equals("unsup")) {
+	                isValid = fileNameInt >= 24000 && fileNameInt < 25000;
+	            } else {
+	                isValid = fileNameInt >= 6000 && fileNameInt < 6250;	                
+	            }
+			} else {
+			    isValid = false;
+			}
 		}
 		return isValid;
 	}
