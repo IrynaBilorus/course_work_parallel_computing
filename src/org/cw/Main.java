@@ -25,6 +25,7 @@ public class Main {
 				Scanner scan = new Scanner(System.in);
 				int numThreads = scan.nextInt();
 				
+				long time0 = System.currentTimeMillis();
 				System.out.println("Start of index creation");
 				System.out.println("Number of threads is " + numThreads);
 
@@ -42,7 +43,9 @@ public class Main {
 					}
 				}
 
-				System.out.println("Process is complete!");
+				long time1 = System.currentTimeMillis();
+				System.out.println("Process is complete!\nTime of processing: " + (time1 - time0) + 
+						"\nSize of index: " + index.size());
 
 			} else {
 				System.out.println("Files not found!!!");
@@ -63,7 +66,7 @@ public class Main {
 	private static boolean isValidFileName(Path path) {
 		String fileName = path.getFileName().toString();
 		boolean isValid = fileName.endsWith(".txt") && fileName.indexOf("_") > 0;
-		if (isValid) {
+		if (isValid) {	
 			fileName = fileName.substring(0, fileName.indexOf("_"));
 			if (fileName.matches("\\d+")) {
 				Integer fileNameInt = Integer.valueOf(fileName);
