@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,6 +48,19 @@ public class Main {
 				System.out.println("Process is complete!\nTime of processing: " + (time1 - time0) + 
 						"\nSize of index: " + index.size());
 
+				System.out.println("\nEnter word for search: ");
+
+				String wordForSearch = scan.next();
+				
+				List<String> foundFiles = index.searchFilesByWord(wordForSearch);
+				if (!foundFiles.isEmpty()) {
+					System.out.println("\nThe word \"" + wordForSearch + "\" found in the " + foundFiles.size() + " files:");
+					for (String file : foundFiles) {
+						System.out.println(file);
+					}
+
+				}
+				
 			} else {
 				System.out.println("Files not found!!!");
 			}
