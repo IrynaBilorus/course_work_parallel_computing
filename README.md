@@ -1,12 +1,12 @@
 # course_work_parallel_computing
 
-##Inverted index
+## Inverted index
 
-#Description
+# Description
 
 This program build Inverted index for a set of documents such as .txt files. There are two solutions implemented in the program: parallel and serial.
 
-#Run in IDE
+# Run in IDE
 
 Project was created using Eclipse IDE. 
 
