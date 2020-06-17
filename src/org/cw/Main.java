@@ -25,6 +25,7 @@ public class Main {
 				System.out.println("Enter number of threads: ");
 				Scanner scan = new Scanner(System.in);
 				int numThreads = scan.nextInt();
+				scan.close();
 				
 				long time0 = System.currentTimeMillis();
 				System.out.println("Start of index creation");
