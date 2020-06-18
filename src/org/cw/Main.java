@@ -21,12 +21,12 @@ public class Main {
 				InvertedIndex index = new InvertedIndex(files);
 
 				System.out.println("Found files:" + files.size());
-				
+
 				System.out.println("Enter number of threads: ");
 				Scanner scan = new Scanner(System.in);
 				int numThreads = scan.nextInt();
-				scan.close();
 				
+
 				long time0 = System.currentTimeMillis();
 				System.out.println("Start of index creation");
 				System.out.println("Number of threads is " + numThreads);
@@ -46,22 +46,23 @@ public class Main {
 				}
 
 				long time1 = System.currentTimeMillis();
-				System.out.println("Process is complete!\nTime of processing: " + (time1 - time0) + 
-						"\nSize of index: " + index.size());
+				System.out.println("Process is complete!\nTime of processing: " + (time1 - time0) + "\nSize of index: "
+						+ index.size());
 
 				System.out.println("\nEnter word for search: ");
 
 				String wordForSearch = scan.next();
-				
+
 				List<String> foundFiles = index.searchFilesByWord(wordForSearch);
 				if (!foundFiles.isEmpty()) {
-					System.out.println("\nThe word \"" + wordForSearch + "\" found in the " + foundFiles.size() + " files:");
+					System.out.println(
+							"\nThe word \"" + wordForSearch + "\" found in the " + foundFiles.size() + " files:");
 					for (String file : foundFiles) {
 						System.out.println(file);
 					}
 
 				}
-				
+
 			} else {
 				System.out.println("Files not found!!!");
 			}
@@ -81,7 +82,7 @@ public class Main {
 	private static boolean isValidFileName(Path path) {
 		String fileName = path.getFileName().toString();
 		boolean isValid = fileName.endsWith(".txt") && fileName.indexOf("_") > 0;
-		if (isValid) {	
+		if (isValid) {
 			fileName = fileName.substring(0, fileName.indexOf("_"));
 			if (fileName.matches("\\d+")) {
 				Integer fileNameInt = Integer.valueOf(fileName);
