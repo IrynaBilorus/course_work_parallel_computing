@@ -52,6 +52,7 @@ public class Main {
 				System.out.println("\nEnter word for search: ");
 
 				String wordForSearch = scan.next();
+				scan.close();
 
 				List<String> foundFiles = index.searchFilesByWord(wordForSearch);
 				if (!foundFiles.isEmpty()) {
